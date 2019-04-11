@@ -2,7 +2,26 @@
 class TabLink {
   constructor(element) {
     // Assign this.element to the passed in DOM element
-    // this.element;
+    this.element = element;
+    this.content = document.querySelector(`.content[data-tab= '${this.element.dataset.tab}']`);
+    this.content = new Content(this.content);
+
+    this.element.addEventListener('click', () => this.elementClick());
+  }
+    elementClick() {
+      this.content.toggleContent();
+    }
+  }
+
+    class Content {
+      constructor(content) {
+        this.contentTab = content;
+      }
+      toggleContent() {
+        this.contentTab.classList.toggle('change');
+      }
+    }
+
     
     // Get the custom data attribute on the Link
     // this.data;
@@ -15,9 +34,9 @@ class TabLink {
     
     // Add a click event listener on this instance, calling the select method on click
 
-  };
+  // };
 
-  select() {
+  // select() {
     // Get all of the elements with the tabs-link class
     // const links;
 
@@ -29,16 +48,16 @@ class TabLink {
     
     // Call the select method on the item associated with this link
 
-  }
-}
+//   }
+// }
 
-class TabItem {
-  constructor(element) {
-    // Assign this.element to the passed in element
-    // this.element;
-  }
+// class TabItem {
+//   constructor(element) {
+//     // Assign this.element to the passed in element
+//     // this.element;
+//   }
 
-  select() {
+//   select() {
     // Select all ".tabs-item" elements from the DOM
     // const items;
 
@@ -46,8 +65,8 @@ class TabItem {
     
     // Add a class named "tabs-item-selected" to this element
     //this.element;
-  }
-}
+//   }
+// }
 
 /* START HERE: 
 
@@ -59,4 +78,7 @@ class TabItem {
 
 */
 
-links = document.querySelectorAll();
+const links = document.querySelectorAll('.tabs-link');
+links.forEach(function(link){
+  return new TabLink(link);
+});
